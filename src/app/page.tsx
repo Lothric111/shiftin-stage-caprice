@@ -1,113 +1,117 @@
+'use client'
 import Image from "next/image";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import Link from "next/link";
+import {myFunction} from "./script";
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <><Navbar />
+    <section id="section1" className="z-50">
+    <div className="bg-red-100 relative">
+      <div className="flex items-center self-center ml-32 ">
+        <div className="relative w-1/2">
+          <Image src={"/assets/Groupe 47.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className=""/>
+          <Image src={"/assets/Groupe 49.png"} alt={"Icon awesome-tiktok"} width={150} height={10} className="absolute top-2/3 right-60"/>
+        </div>
+        <Link href={""} className="">
+          <Image src={"/assets/Ellipse 10.png"} alt={"rezra"} width={80} height={100} className="absolute bottom-3 left-1/2 " />
+          <Image src={"/assets/Ellipse 1.png"} alt={"rezra"} width={80} height={100} className="absolute bottom-5 left-1/2 " />
+          
+          <Image src={"/assets/118232.png"} alt={"rezra"} width={80} height={100} className="-translate-x-1/2 absolute bottom-2 left-1/2 animate-bounce_animation" />
+        </Link>
+        <div className="w-1/2 ">
+          <Image src={"/assets/Groupe 28.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/2"/>
+          <Image src={"/assets/Groupe 16.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/2"/>
+          <Link href={""}><p className="text-red-100 bg-yellow-600  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto -translate-x-3/4 my-11 font-CooperArabic-Regular">أشارك في المسابقة</p></Link>
+        </div>
+      </div>  
+        <Image src={"/assets/Image 4.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="absolute left-0 bottom-16 w-1/12 "/>
+      </div>
+    </section>
+
+    <section id="section2" className="z-0 pb-16">
+      <div>
+        <div className="text-center pt-16 text-red-100 pb-8">
+          <h1 className="text-6xl pb-10 font-CooperArabic-Regular">خطوات المشاركة</h1>
+          <p className="text-3xl font-FFHekaya-Light">كپريس ولاّت و جابت معاها العديد من المفاجآت!</p> 
+          <p className="text-3xl font-FFHekaya-Light">لِكل محبي كپريس، لِكل من كبّر بها، هاذه المسابقة لكم خصيصا!</p>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-evenly items-center">
+          <div className="relative">
+            <Image src={"/assets/Rectangle 110.png"} alt={""} width={1000} height={100} className="w-full"/>
+            <Image src={"/assets/Ellipse 1.png"} alt={"rezra"} width={80} height={100} className="absolute top-12 left-1/3 -translate-x-3/4 w-1/6" />
+            <Image src={"/assets/Groupe 54.png"} alt={""} width={1000} height={100} className="w-1/2 absolute top-12 right-1/2 translate-x-1/2"/>
+            <Image src={"/assets/Groupe 103.png"} alt={""} width={1000} height={100} className="w-3/4 absolute -bottom-5 right-1/2 translate-x-1/2"/>
+            <p className="absolute bottom-1/2 translate-y-1/3 text-white font-FFHekaya-Light text-4xl w-full text-center font-bold">طاقي 5 صحابك<br/>
+                لي يكونوا هوما تاني
+                <br/>متابعين صفحة كپريس</p>
+          </div>
+          <div className="relative">
+            <Image src={"/assets/Rectangle 110.png"} alt={""} width={1000} height={100} className="w-full"/>
+            <Image src={"/assets/Ellipse 1.png"} alt={"rezra"} width={80} height={100} className="absolute top-12 left-1/3 -translate-x-3/4 w-1/6" />
+            <Image src={"/assets/Groupe 53.png"} alt={""} width={1000} height={100} className="w-1/2 absolute top-12 right-1/2 translate-x-1/2"/>
+            <Image src={"/assets/Groupe 102.png"} alt={""} width={1000} height={100} className="w-3/4 absolute -bottom-5 right-1/2 translate-x-1/2"/>
+            <p className="absolute bottom-1/2 translate-y-1/3 text-white font-FFHekaya-Light text-4xl w-full text-center font-bold">تابع صفحة
+                <br/>كپريس</p>
+          </div>
+          <div className="relative">
+            <Image src={"/assets/Rectangle 110.png"} alt={""} width={1000} height={100} className="w-full"/>
+            <Image src={"/assets/Ellipse 1.png"} alt={"rezra"} width={80} height={100} className="absolute top-12 left-1/3 -translate-x-3/4 w-1/6" />
+            <Image src={"/assets/Groupe 51.png"} alt={""} width={1000} height={100} className="w-1/2 absolute top-12 right-1/2 translate-x-1/2"/>
+            <Image src={"/assets/Groupe 101.png"} alt={""} width={1000} height={100} className="w-3/4 absolute -bottom-5 right-1/2 translate-x-1/2"/>
+            <p className="absolute bottom-1/2 translate-y-1/3 text-white font-FFHekaya-Light text-4xl w-full text-center font-bold">اكتب’’ ياك باينة؟’’
+                <br/>
+                بحبات كپريس،
+                <br/>صوّرْها و ابعتها</p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+    <section id="section3">
+      <div className="bg-red-100 ">
+        <div className="text-center pt-16 text-white pb-8">
+          <h1 className="text-5xl pb-10 font-CooperArabic-Regular">سجل الآن</h1>
+        </div>
+        <div className="flex-col bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center items-center py-5">
+          <form>
+            <div className="relative">
+              <input type="text" id="name" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/4 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-1">الإسم واللقب</label>
+            </div>
+            <div className="relative">
+              <input type="text" id="addresse" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="addresse" className="absolute text-2xl font-FFHekaya-Light text-red-100 translate-x-1/2 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto">العنوان</label>
+            </div>
+            <div className="relative">
+              <input type="text" id="num" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="num" className="absolute text-2xl font-FFHekaya-Light text-red-100  duration-300 top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-2">رقم الهاتف</label>
+            </div>
+            <div className="relative border-yellow-400 border-2 rounded-full w-2/3 translate-x-1/4 m-5 px-5 py-3 text-xl border-dashed" style={{ height: "15vh" }}>
+              {/* Input de type fichier caché */}
+              <input type="file" name="file" id="file" className="hidden" multiple />
+              
+              {/* Label contenant l'image */}
+              <label htmlFor="file" className="cursor-pointer flex justify-center items-center flex-col">
+                <Image src={"/assets/Rectangle 124.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
+                <Image src={"/assets/Groupe 107.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
+                <p className="font-FFHekaya-Light text-red-100 w-1/2 text-3xl text-center absolute left-10 top-5">صورة ''ياك باينة؟'' بحبات كپريس</p>
+              </label>
+            </div>
+            <div className="flex border" lang="ar" dir="rtl">
+              <input type="checkbox" className="color-red-100"/>
+            </div>
+
+          </form>
+        </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </section>
+    
+    <Footer /></>
   );
 }

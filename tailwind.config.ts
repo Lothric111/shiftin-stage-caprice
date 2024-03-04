@@ -8,11 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      
+      fontFamily: {
+        'CooperArabic-Regular': ['CooperArabic-Regular', 'sans-serif'],
+        'FFHekaya-Light': ['FFHekaya-Light', 'sans-serif'],
       },
+      colors:{
+        "red-100":"#BF1725"
+      },
+      animation:{
+        bounce_animation:"bounce 2s ease-in-out infinite",
+      }
     },
   },
   plugins: [],
