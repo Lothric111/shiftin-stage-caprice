@@ -19,13 +19,13 @@ export default function Navbar() {
             <Link href={""} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-white">سجل الآن</Link>
             <Link href={""} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-white">خطوات المشاركة</Link>
           </div>
-          <Image src={"/assets/zyro-image.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="absolute top-0 right-0 w-1/4 z-10"/> 
+          <Image src={"/assets/zyro-image.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="absolute top-0 right-0 w-1/4 z-40"/> 
         </div>
         {/* les 2 coins de lecran */}
-        <div className="top-0 left-0 w-1/12 fixed z-1">
+        <div className="top-0 left-0 w-1/12 fixed z-10">
           <Image src={"/assets/Left.png"} alt={"Icon awesome-tiktok"} width={1000} height={10}/> 
         </div>
-        <div className="top-0 right-0 w-1/12 fixed z-1">
+        <div className="top-0 right-0 w-1/12 fixed z-10">
           <Image src={"/assets/Right.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} />
         </div>
       </header>

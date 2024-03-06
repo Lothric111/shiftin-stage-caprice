@@ -3,15 +3,13 @@ import Image from "next/image";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Link from "next/link";
-import {myFunction} from "./script";
-import { useEffect, useState } from 'react'
 
 export default function Home() {
 
 
   return (
     <><Navbar />
-    <section id="section1" className="z-50">
+    <section id="section1" className="z-40 relative">
     <div className="bg-red-100 relative">
       <div className="flex items-center self-center ml-32 ">
         <div className="relative w-1/2">
@@ -27,7 +25,7 @@ export default function Home() {
         <div className="w-1/2 ">
           <Image src={"/assets/Groupe 28.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/2"/>
           <Image src={"/assets/Groupe 16.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/2"/>
-          <Link href={""}><p className="text-red-100 bg-yellow-600  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto -translate-x-3/4 my-11 font-CooperArabic-Regular">أشارك في المسابقة</p></Link>
+          <Link href={""}><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto -translate-x-3/4 my-11 font-CooperArabic-Regular">أشارك في المسابقة</p></Link>
         </div>
       </div>  
         <Image src={"/assets/Image 4.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="absolute left-0 bottom-16 w-1/12 "/>
@@ -74,12 +72,12 @@ export default function Home() {
     </section>
 
     <section id="section3">
-      <div className="bg-red-100 ">
-        <div className="text-center pt-16 text-white pb-8">
+      <div className="bg-red-100  relative z-1 rounded-b-[50px]">
+        <div className="text-center pt-16 text-white pb-8 ">
           <h1 className="text-5xl pb-10 font-CooperArabic-Regular">سجل الآن</h1>
         </div>
-        <div className="flex-col bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center items-center py-5">
-          <form>
+        <div className="flex-col bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center items-center py-5 shadow-[#6a040f_0px_10px_0px_0px]">
+          <form className="">
             <div className="relative">
               <input type="text" id="name" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
               <label lang="ar" dir='rtl' htmlFor="name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/4 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-1">الإسم واللقب</label>
@@ -92,7 +90,7 @@ export default function Home() {
               <input type="text" id="num" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
               <label lang="ar" dir='rtl' htmlFor="num" className="absolute text-2xl font-FFHekaya-Light text-red-100  duration-300 top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-2">رقم الهاتف</label>
             </div>
-            <div className="relative border-yellow-400 border-2 rounded-full w-2/3 translate-x-1/4 m-5 px-5 py-3 text-xl border-dashed" style={{ height: "15vh" }}>
+            <div className="relative border-yellow-400 border-2 rounded-full w-2/3 translate-x-1/4 m-5 px-5 py-3 text-xl border-dashed" style={{ height: "15dvh" }}>
               {/* Input de type fichier caché */}
               <input type="file" name="file" id="file" className="hidden" multiple />
               
@@ -103,15 +101,85 @@ export default function Home() {
                 <p className="font-FFHekaya-Light text-red-100 w-1/2 text-3xl text-center absolute left-10 top-5">صورة ''ياك باينة؟'' بحبات كپريس</p>
               </label>
             </div>
-            <div className="flex border" lang="ar" dir="rtl">
-              <input type="checkbox" className="color-red-100"/>
+            <div className="flex font-FFHekaya-Light" lang="ar" dir="rtl" >
+              <input type="checkbox" id="validate" className="accent-red-100 outline-red-100 mr-32 ml-5 rounded-[50px]"/>
+              <label lang="ar" dir='rtl' htmlFor="validate" className="text-red-100 text-3xl">أوافق على</label>
+              <Link href={""} className="text-red-100 text-3xl underline"> شروط المسابقة </Link>
             </div>
-
+            <Link href={""}><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto my-11 font-CooperArabic-Regular  shadow-[#BF1725_0px_5px_0px_0px]"> ارسال </p></Link>
           </form>
+        </div>
+        <Image src={"/assets/Groupe de masques 6.png"} alt={""} width={10000} height={10000} className="absolute right-0 top-1/4 w-1/5"/>
+        <Image src={"/assets/Groupe 106.png"} alt={""} width={10000} height={10000} className="absolute left-0 top-0 translate-y-1/3 w-1/6"/>
+        <Image src={"/assets/Rectangle 100.png"} alt={""} width={10000} height={10000} className="absolute left-1/4 top-1/2 translate-y-1/2 -translate-x-1/4 w-1/6" />
+        <Image src={"/assets/Rectangle 102.png"} alt={""} width={10000} height={10000} className="absolute left-1/4 top-0 translate-y-1/4 w-1/6" />
+        <Image src={"/assets/Rectangle 101.png"} alt={""} width={10000} height={10000} className="absolute right-1/4 top-0 translate-y-full -translate-x-1/3 w-1/12" />
+
+
+        <div className="">
+          <div className="bg-yellow-400 w-1/4 mx-auto text-center mt-5 rounded-full">
+            <p className="text-red-100 font-FFHekaya-Light text-2xl px-3 py-2"> لا تفوّتوا الفرصة: ابدؤوا الآن متابعة العد التنازلي للمسابقة </p>
+          </div>
+          <div className="bg-red-900 w-1/5 m-auto text-center rounded-t-[50px] -translate-y-2">
+            <p className="text-white font-FFHekaya-Light text-8xl">20 : 17 :24</p>
+            <p className="text-white font-FFHekaya-Light text-4xl"> دقيقة : ساعة : يوم </p>
+          </div>
         </div>
       </div>
     </section>
     
+    <section id="section4">
+      <div className="py-8">
+        <div className="text-center pt-16 text-red-100 pb-8 ">
+          <h1 className="text-5xl pb-10 font-CooperArabic-Regular"> كبريسة اليوم بحلة الزمان </h1>
+          <h1 className="text-3xl py-5 font-FFHekaya-Light"> كيما حبيتوها درناها و كيما بكري ردينها!</h1>
+        </div>
+        <div className="relative ">
+          <Image src={"/assets/Groupe de masques 1.png"} alt={""} width={10000} height={10000} className="w-1/2 m-auto cursor-pointer" />
+          <Image src={"/assets/Groupe 473.png"} alt={""} width={10000} height={10000} className="w-1/12 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute cursor-pointer" />  
+          <Image src={"/assets/Groupe de masques 6.png"} alt={""} width={10000} height={10000} className="absolute left-1/4 top-1/4 w-1/12 -translate-x-full translate-y-1/4"/>
+          <Image src={"/assets/Groupe 472.png"} alt={""} width={10000} height={10000} className="absolute right-0 top-0 w-1/12 -translate-x-full -translate-y-1/4"/>
+        </div>
+        
+        <div className="flex flex-col lg:flex-row justify-evenly items-center py-16">
+          <div className="relative group">
+            <Image src={"/assets/Rectangle 110.png"} alt={""} width={1000} height={100} className="w-full"/>
+            <Image src={"/assets/Groupe 408.png"} alt={"rezra"} width={1000} height={100} className="absolute top-0 -translate-y-1/4  w-full" />
+            <Image src={"/assets/Groupe de masques 4.png"} alt={""} width={1000} height={100} className="w-full absolute top-0 group-hover:rotate-180 transition duration-150"/>
+            <Image src={"/assets/Groupe 486.png"} alt={""} width={1000} height={100} className="w-3/4 absolute bottom-0 -translate-y-1/4 right-1/2 translate-x-1/2"/>            
+          </div>
+          <div className="relative group">
+            <Image src={"/assets/Rectangle 110.png"} alt={""} width={1000} height={100} className="w-full"/>
+            <Image src={"/assets/Groupe 458.png"} alt={"rezra"} width={1000} height={100} className="absolute top-0 -translate-y-1/4 w-full" />
+            <Image src={"/assets/Tracé 3616.png"} alt={"rezra"} width={1000} height={100} className="absolute top-1/4 w-full" />
+            <Image src={"/assets/Groupe de masques 4.png"} alt={""} width={1000} height={100} className="w-full absolute top-0 group-hover:rotate-180 transition duration-150"/>
+            <Image src={"/assets/Groupe 486.png"} alt={""} width={1000} height={100} className="w-3/4 absolute bottom-0 -translate-y-1/4 right-1/2 translate-x-1/2"/>            
+          </div>
+          <div className="relative group">
+            <Image src={"/assets/Rectangle 110.png"} alt={""} width={1000} height={100} className="w-full"/>
+            <Image src={"/assets/Groupe de masques 5.png"} alt={"rezra"} width={1000} height={100} className="absolute top-0  w-full" />
+            <Image src={"/assets/Groupe de masques 4.png"} alt={""} width={1000} height={100} className="w-full absolute top-0 group-hover:rotate-180 transition duration-150"/>
+            <Image src={"/assets/Groupe 486.png"} alt={""} width={1000} height={100} className="w-3/4 absolute bottom-0 -translate-y-1/4 right-1/2 translate-x-1/2"/>            
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-5 w-4/5 mx-auto">
+          <div className="flex items-center justify-start gap-3 pt-2 pb-4 ml-28 ">
+            <Link href={""}><Image src={"/assets/Icon awesome-youtube-white.png"} alt={"Icon awesome-youtube"} width={1000} height={10} className="bg-red-100 p-2 rounded-full h-9 w-full border-b-2 border-l-2 border-yellow-500"/></Link>
+            <Link href={""}><Image src={"/assets/Icon awesome-instagram-white.png"} alt={"Icon awesome-insta"} width={1000} height={10} className="bg-red-100  p-2 rounded-full h-9 w-full border-b-2 border-l-2 border-yellow-500"/></Link>
+            <Link href={""}><Image src={"/assets/Icon simple-tiktok-white.png"} alt={"Icon awesome-tiktok"}    width={1000} height={10} className="bg-red-100  p-2 rounded-full h-9 w-full border-b-2 border-l-2 border-yellow-500"/></Link>
+            <Link href={""}><Image src={"/assets/Icon zocial-facebook-white.png"} alt={"Icon awesome-faceboo"} width={1000} height={10} className="bg-red-100  p-2 rounded-full h-9 w-full border-b-2 border-l-2 border-yellow-500"/></Link>
+            <Link href={""} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-red-100">تابعونا</Link>
+          </div>
+          <div className="">
+            <Image src={"/assets/Groupe 28.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/3 translate-x-2/3"/>
+            <Image src={"/assets/Groupe 379.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/3 translate-x-2/3"/>
+          </div>
+          <Image src={"/assets/Groupe 378.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/6"/>
+
+        </div>
+      </div>
+    </section>
     <Footer /></>
   );
 }
