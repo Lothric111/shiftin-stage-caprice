@@ -77,7 +77,7 @@ export default function Home() {
           <h1 className="text-5xl pb-10 font-CooperArabic-Regular">سجل الآن</h1>
         </div>
         <div className="flex-col bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center items-center py-5 shadow-[#6a040f_0px_10px_0px_0px]">
-          <form className="">
+          <form method="post" className="">
             <div className="relative">
               <input type="text" id="name" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
               <label lang="ar" dir='rtl' htmlFor="name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/4 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-1">الإسم واللقب</label>
