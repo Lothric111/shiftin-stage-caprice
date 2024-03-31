@@ -63,9 +63,27 @@ function ParticipantsPage() {
     setTimeout(() => setShowMessage(false), 3000); // Masquer le message après 3 secondes
   };
 
-  const handleDeleteParticipant = async (id: number) => {
-    // Logique pour supprimer un participant
-  };
+ const handleDeleteParticipant = async (id: number) => {
+  try {
+    // Effectuer une requête DELETE vers le backend pour supprimer le participant
+    const response = await fetch(`http://localhost:3001/participants/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete participant');
+    }
+
+    // Mettre à jour l'état local en supprimant le participant supprimé
+    setParticipants(prevParticipants =>
+      prevParticipants.filter(participant => participant.id !== id)
+    );
+
+    console.log('Participant deleted successfully');
+  } catch (error) {
+    console.error('Error deleting participant:', error);
+  }
+};
 
   const handleSort = (property: string) => {
     if (sortBy === property) {
@@ -129,37 +147,37 @@ function ParticipantsPage() {
 
   return (
     <>
-      {showMessage && <div style={{ color: 'green' }}>Modifications enregistrées avec succès !</div>}
-      <button onClick={handleSaveChanges}>Enregistrer</button>
-      <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-        <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
+      {showMessage && <div style={{ color: 'green' }} className=''>Modifications enregistrées avec succès !</div>}
+      <button onClick={handleSaveChanges} className='text-red-100 bg-yellow-400 font-extrabold text-center p-2 rounded-lg ml-20'>Enregistrer</button>
+      <div className='relative overflow-x-auto shadow-md sm:rounded-lg bg-red-100'>
+        <table className='w-full text-sm text-left rtl:text-right'>
           <thead>
-            <tr>
-              <th scope="col" className="px-6 py-3" onClick={() => handleSort('id')}>
+            <tr className='border-b-2 border-red-400'>
+              <th scope="col" className="px-6 py-3 text-yellow-400" onClick={() => handleSort('id')}>
                 ID {renderSortButton('id')}
               </th>
-              <th scope="col" className="px-6 py-3" onClick={() => handleSort('full_name')}>
+              <th scope="col" className="px-6 py-3 text-yellow-400" onClick={() => handleSort('full_name')}>
                 Nom complet {renderSortButton('full_name')}
               </th>
-              <th scope="col" className="px-6 py-3" onClick={() => handleSort('phone')}>
+              <th scope="col" className="px-6 py-3 text-yellow-400" onClick={() => handleSort('phone')}>
                 Numéro de télèphone {renderSortButton('phone')}
               </th>
-              <th scope="col" className="px-6 py-3" onClick={() => handleSort('address')}>
+              <th scope="col" className="px-6 py-3 text-yellow-400" onClick={() => handleSort('address')}>
                 Adresse {renderSortButton('address')}
               </th>
-              <th scope="col" className="px-6 py-3">Image</th>
-              <th scope="col" className="px-6 py-3">Accepté</th>
-              <th scope="col" className="px-6 py-3">Modifier</th>
-              <th scope="col" className="px-6 py-3">Supprimer</th>
+              <th scope="col" className="px-6 py-3 text-yellow-400">Image</th>
+              <th scope="col" className="px-6 py-3 text-yellow-400">Accepté</th>
+              <th scope="col" className="px-6 py-3 text-yellow-400">Modifier</th>
+              <th scope="col" className="px-6 py-3 text-yellow-400">Supprimer</th>
             </tr>
           </thead>
           <tbody>
             {sortedParticipants.map(participant => (
-              <tr key={participant.id}>
-                <td scope="row" className="px-6 py-4">{participant.id}</td>
-                <td scope="row" className="px-6 py-4">
+              <tr key={participant.id} className='hover:bg-red-800  border-b-2 border-red-400'>
+                <td scope="row" className="px-6 py-4 text-yellow-400">{participant.id}</td>
+                <td scope="row" className="px-6 py-4 text-yellow-400">
                   {editingParticipantId === participant.id ? (
-                    <input
+                    <input className='text-black'
                       type="text"
                       value={newFullName}
                       onChange={e => setNewFullName(e.target.value)}
@@ -169,9 +187,9 @@ function ParticipantsPage() {
                     participant.full_name
                   )}
                 </td>
-                <td scope="row" className="px-6 py-4">{participant.phone}</td>
-                <td scope="row" className="px-6 py-4">{participant.address}</td>              
-                <td scope="row" className="px-6 py-4"><img src={participant.image_path} alt={participant.full_name} /></td>
+                <td scope="row" className="px-6 py-4 text-yellow-400">{participant.phone}</td>
+                <td scope="row" className="px-6 py-4 text-yellow-400">{participant.address}</td>              
+                <td scope="row" className="px-6 py-4 text-yellow-400 "><img src={participant.image_path} alt={participant.full_name} /></td>
                 <td scope="row" className="px-6 py-4">
                   <input
                     type="checkbox"
@@ -179,10 +197,10 @@ function ParticipantsPage() {
                     onChange={e => handleAcceptanceChange(participant.id, e.target.checked)}
                   />
                 </td>
-                <td scope="row" className="px-6 py-4">
+                <td scope="row" className="px-6 py-4 text-yellow-400" >
                   <button onClick={() => setEditingParticipantId(participant.id)}>Modifier</button>
                 </td>
-                <td scope="row" className="px-6 py-4">
+                <td scope="row" className="px-6 py-4 text-yellow-400">
                   <button onClick={() => handleDeleteParticipant(participant.id)}>Supprimer</button>
                 </td>
               </tr>
