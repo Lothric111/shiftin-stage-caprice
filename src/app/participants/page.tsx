@@ -16,6 +16,7 @@ function ParticipantsPage() {
   const [editingParticipantId, setEditingParticipantId] = useState<number | null>(null);
   const [newFullName, setNewFullName] = useState<string>('');
   const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [newAcceptedState, setNewAcceptedState] = useState<boolean>(); // Ajout de l'état de la case à cocher
   const [sortBy, setSortBy] = useState<string>('id');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
@@ -42,7 +43,9 @@ function ParticipantsPage() {
         participant.id === id ? { ...participant, is_accepted: newValue } : participant
       )
     );
+    setNewAcceptedState(newValue);
   };
+  
 
   const handleUpdateFullName = (id: number) => {
     const participantToUpdate = participants.find(participant => participant.id === id);
@@ -113,30 +116,30 @@ function ParticipantsPage() {
   });
 
   const handleSaveChanges = async () => {
-    if (editingParticipantId === null) return; // Ne rien faire si aucun participant n'est en cours de modification
-
+    if (editingParticipantId === null) return;
+  
     try {
-      // Effectuer une requête PATCH vers le backend pour mettre à jour le participant
       const response = await fetch(`http://localhost:3001/participants/${editingParticipantId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ full_name: newFullName }), // Envoyer le nouveau nom complet
+        body: JSON.stringify({ full_name: newFullName,is_accepted: newAcceptedState  }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to update participant');
       }
-
+  
       console.log('Participant updated successfully');
-      fetchParticipants(); // Actualiser la liste des participants
-      setShowMessage(true); // Afficher le message de confirmation
-      setTimeout(() => setShowMessage(false), 3000); // Masquer le message après 3 secondes
+      fetchParticipants();
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 3000);
     } catch (error) {
       console.error('Error updating participant:', error);
     }
   };
+  
 
   const renderSortButton = (column: string) => {
     if (sortBy === column) {

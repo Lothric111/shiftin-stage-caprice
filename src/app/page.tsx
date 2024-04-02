@@ -2,10 +2,41 @@
 import Image from "next/image";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from 'axios';
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    full_name: '',
+    phone: '',
+    address: '',
+    image_path: ''
+  });
+  
+    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (files) {
+        setSelectedFiles(Array.from(files));
+      }
+    };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+ 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3001/participants', formData);
+      console.log(response.data); // Log the response from backend
+      // Reset form after successful submission if needed
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
 
   return (
     <><Navbar />
@@ -76,37 +107,35 @@ export default function Home() {
         <div className="text-center pt-16 text-white pb-8 ">
           <h1 className="text-5xl pb-10 font-CooperArabic-Regular">سجل الآن</h1>
         </div>
-        <div className="flex-col bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center items-center py-5 shadow-[#6a040f_0px_10px_0px_0px]">
-          <form method="post" className="">
+        <div className="flex flex-col items-center bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center py-5 shadow-[#6a040f_0px_10px_0px_0px]">
+          <form onSubmit={handleSubmit}>
             <div className="relative">
-              <input type="text" id="name" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
-              <label lang="ar" dir='rtl' htmlFor="name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/4 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-1">الإسم واللقب</label>
+              <input type="text" required name="full_name" value={formData.full_name} onChange={handleChange}  lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="full_name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-3/4 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:-translate-x-7">الإسم واللقب</label>
             </div>
             <div className="relative">
-              <input type="text" id="addresse" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
-              <label lang="ar" dir='rtl' htmlFor="addresse" className="absolute text-2xl font-FFHekaya-Light text-red-100 translate-x-1/2 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto">العنوان</label>
+              <input type="text" required name="address" value={formData.address} onChange={handleChange} lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="address" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/2 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-1">العنوان</label>
             </div>
             <div className="relative">
-              <input type="text" id="num" lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
-              <label lang="ar" dir='rtl' htmlFor="num" className="absolute text-2xl font-FFHekaya-Light text-red-100  duration-300 top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-2">رقم الهاتف</label>
+              <input type="text" required name="phone" value={formData.phone} onChange={handleChange} lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="phone" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/2 duration-300 top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:-translate-x-1 ">رقم الهاتف</label>
             </div>
-            <div className="relative border-yellow-400 border-2 rounded-full w-2/3 translate-x-1/4 m-5 px-5 py-3 text-xl border-dashed" style={{ height: "15dvh" }}>
+            <div className="relative border-yellow-400 border-2 rounded-full m-5 px-5 py-3 text-xl border-dashed" style={{ height: "15dvh" }}>
               {/* Input de type fichier caché */}
-              <input type="file" name="file" id="file" className="hidden" multiple />
-              
-              {/* Label contenant l'image */}
-              <label htmlFor="file" className="cursor-pointer flex justify-center items-center flex-col">
+               <input type="file" required name="image_path" onChange={handleFileChange} multiple />
+              <label htmlFor="image_path"  className="cursor-pointer flex justify-center items-center flex-col">
                 <Image src={"/assets/Rectangle 124.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
                 <Image src={"/assets/Groupe 107.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
                 <p className="font-FFHekaya-Light text-red-100 w-1/2 text-3xl text-center absolute left-10 top-5">صورة ''ياك باينة؟'' بحبات كپريس</p>
               </label>
             </div>
             <div className="flex font-FFHekaya-Light" lang="ar" dir="rtl" >
-              <input type="checkbox" id="validate" className="accent-red-100 outline-red-100 mr-32 ml-5 rounded-[50px]"/>
+              <input type="checkbox" required className="accent-red-100 outline-red-100 mr-32 ml-5 rounded-[50px]"/>
               <label lang="ar" dir='rtl' htmlFor="validate" className="text-red-100 text-3xl">أوافق على</label>
               <Link href={""} className="text-red-100 text-3xl underline"> شروط المسابقة </Link>
             </div>
-            <Link href={""}><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto my-11 font-CooperArabic-Regular  shadow-[#BF1725_0px_5px_0px_0px]"> ارسال </p></Link>
+            <button type="submit"><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center px-32 rounded-full justify-center my-11 font-CooperArabic-Regular  shadow-[#BF1725_0px_5px_0px_0px]"> ارسال </p></button>
           </form>
         </div>
         <Image src={"/assets/Groupe de masques 6.png"} alt={""} width={10000} height={10000} className="absolute right-0 top-1/4 w-1/5"/>
