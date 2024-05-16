@@ -5,41 +5,51 @@ import Footer from "./Footer";
 import axios from 'axios';
 import Link from "next/link";
 import { useState } from "react";
+import Countdown from "react-countdown";
+
+type FormType = {
+  full_name: string,
+  phone: string,
+  address: string,
+  image_path?: File
+}
 
 export default function Home() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormType>({
     full_name: '',
     phone: '',
     address: '',
-    image_path: ''
-  });
-  
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-      if (files) {
-        setSelectedFiles(Array.from(files));
-      }
-    };
+    image_path: undefined
+  });  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const file = e.target?.files?.[0];
+    setFormData({ ...formData, [e.target.name]: e.target.value, image_path: file });
   };
  
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    console.log({ formData })
     try {
-      const response = await axios.post('http://localhost:3001/participants', formData);
+      const response = await axios.post('http://localhost:3001/participants', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
       console.log(response.data); // Log the response from backend
       // Reset form after successful submission if needed
-    } catch (error) {
+      window.alert('Le formulaire a été validé avec succès.');
+    window.location.reload();
+    } 
+    
+    catch (error) {
       console.error('Error submitting form:', error);
     }
   };
 
   return (
-    <><Navbar />
+    <>
+    <Navbar />
     <section id="section1" className="z-40 relative">
     <div className="bg-red-100 relative">
       <div className="flex items-center self-center ml-32 ">
@@ -47,7 +57,7 @@ export default function Home() {
           <Image src={"/assets/Groupe 47.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className=""/>
           <Image src={"/assets/Groupe 49.png"} alt={"Icon awesome-tiktok"} width={150} height={10} className="absolute top-2/3 right-60"/>
         </div>
-        <Link href={""} className="">
+        <Link href="#section2" className="">
           <Image src={"/assets/Ellipse 10.png"} alt={"rezra"} width={80} height={100} className="absolute bottom-3 left-1/2 " />
           <Image src={"/assets/Ellipse 1.png"} alt={"rezra"} width={80} height={100} className="absolute bottom-5 left-1/2 " />
           
@@ -56,7 +66,7 @@ export default function Home() {
         <div className="w-1/2 ">
           <Image src={"/assets/Groupe 28.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/2"/>
           <Image src={"/assets/Groupe 16.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="w-1/2"/>
-          <Link href={""}><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto -translate-x-3/4 my-11 font-CooperArabic-Regular">أشارك في المسابقة</p></Link>
+          <Link href={"#section3"}><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center w-1/3 rounded-full m-auto -translate-x-3/4 my-11 font-CooperArabic-Regular">أشارك في المسابقة</p></Link>
         </div>
       </div>  
         <Image src={"/assets/Image 4.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="absolute left-0 bottom-16 w-1/12 "/>
@@ -102,40 +112,45 @@ export default function Home() {
       </div>
     </section>
 
-    <section id="section3">
+    <section id="section3"> 
       <div className="bg-red-100  relative z-1 rounded-b-[50px]">
         <div className="text-center pt-16 text-white pb-8 ">
           <h1 className="text-5xl pb-10 font-CooperArabic-Regular">سجل الآن</h1>
         </div>
         <div className="flex flex-col items-center bg-white rounded-[50px] lg:w-1/3 translate-x-full justify-center py-5 shadow-[#6a040f_0px_10px_0px_0px]">
           <form onSubmit={handleSubmit}>
-            <div className="relative">
-              <input type="text" required name="full_name" value={formData.full_name} onChange={handleChange}  lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
-              <label lang="ar" dir='rtl' htmlFor="full_name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-3/4 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:-translate-x-7">الإسم واللقب</label>
+            <div className="relative mb-8 mt-8">
+              <input type="text" required name="full_name" value={formData.full_name} onChange={handleChange}  lang="ar" dir='rtl' className="w-2/3 py-5 px-3 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0 peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="full_name" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-3/4 duration-300 -top-0 transform -translate-y-4 scale-75 px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-[:not(:placeholder-shown)]:bg-yellow-300 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75 rtl:peer-focus:left-auto peer-[:not(:placeholder-shown)]:-translate-x-12 peer-focus:-translate-x-10 peer-focus:-translate-y-8">الإسم واللقب</label>
             </div>
-            <div className="relative">
-              <input type="text" required name="address" value={formData.address} onChange={handleChange} lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
-              <label lang="ar" dir='rtl' htmlFor="address" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/2 duration-300 -top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:translate-x-1">العنوان</label>
+            <div className="relative mb-8 mt-8 ">
+              <input type="text" required name="address" value={formData.address} onChange={handleChange} lang="ar" dir='rtl' className="w-2/3 py-5 px-3 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="address" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-3/4 duration-300 -top-0 transform -translate-y-4 scale-75 px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-[:not(:placeholder-shown)]:bg-yellow-300 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75 rtl:peer-focus:left-auto peer-[:not(:placeholder-shown)]:-translate-x-5 peer-focus:translate-x-10 peer-focus:-translate-y-8">العنوان</label>
             </div>
-            <div className="relative">
-              <input type="text" required name="phone" value={formData.phone} onChange={handleChange} lang="ar" dir='rtl' className="w-2/3 py-5 px-3 mb-8 mt-8 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
-              <label lang="ar" dir='rtl' htmlFor="phone" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-1/2 duration-300 top-0 transform -translate-y-4 scale-75 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75  rtl:peer-focus:left-auto peer-focus:-translate-x-1 ">رقم الهاتف</label>
+            <div className="relative mb-8 mt-8">
+              <input type="text" required name="phone" value={formData.phone} onChange={handleChange} lang="ar" dir='rtl' className="w-2/3 py-5 px-3 translate-x-1/4 border-yellow-300 border-2 rounded-full  pb-2.5 pt-4 text-sm  bg-transparent appearance-non focus:outline-none focus:ring-0  peer" placeholder=" " />
+              <label lang="ar" dir='rtl' htmlFor="phone" className="absolute text-2xl font-FFHekaya-Light text-red-100 -translate-x-3/4 duration-300 -top-0 transform -translate-y-4 scale-75 px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-[:not(:placeholder-shown)]:bg-yellow-300 peer-placeholder-shown:top-1/2 peer-focus:top-1/3 peer-focus:bg-yellow-300 rounded-full peer-focus:scale-75 rtl:peer-focus:left-auto peer-[:not(:placeholder-shown)]:-translate-x-10 peer-focus:-translate-x-10 peer-focus:-translate-y-8">رقم الهاتف</label>
             </div>
             <div className="relative border-yellow-400 border-2 rounded-full m-5 px-5 py-3 text-xl border-dashed" style={{ height: "15dvh" }}>
               {/* Input de type fichier caché */}
-               <input type="file" required name="image_path" onChange={handleFileChange} multiple />
-              <label htmlFor="image_path"  className="cursor-pointer flex justify-center items-center flex-col">
-                <Image src={"/assets/Rectangle 124.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
-                <Image src={"/assets/Groupe 107.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
-                <p className="font-FFHekaya-Light text-red-100 w-1/2 text-3xl text-center absolute left-10 top-5">صورة ''ياك باينة؟'' بحبات كپريس</p>
+              <label htmlFor="image_path" className="cursor-pointer flex justify-center items-center flex-col">
+                  <Image src={"/assets/Rectangle 124.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
+                  <Image src={"/assets/Groupe 107.png"} alt={""} width={100} height={100} className="absolute right-0 -translate-x-1/2 top-5 z-1" />
+                  <p className="font-FFHekaya-Light text-red-100 w-1/2 text-3xl text-center absolute left-10 top-5">صورة ''ياك باينة؟'' بحبات كپريس</p>
               </label>
+              <input type="file" required name="image_path" id="image_path" onChange={handleChange} multiple className="hidden" accept="image/*"/>
             </div>
+            {formData?.image_path && (
+                <div className="text-center mt-2 font-FFHekaya-Light text-xl text-red-100">
+                  {formData.image_path.name}
+                </div>
+              )}
             <div className="flex font-FFHekaya-Light" lang="ar" dir="rtl" >
               <input type="checkbox" required className="accent-red-100 outline-red-100 mr-32 ml-5 rounded-[50px]"/>
               <label lang="ar" dir='rtl' htmlFor="validate" className="text-red-100 text-3xl">أوافق على</label>
               <Link href={""} className="text-red-100 text-3xl underline"> شروط المسابقة </Link>
             </div>
-            <button type="submit"><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center px-32 rounded-full justify-center my-11 font-CooperArabic-Regular  shadow-[#BF1725_0px_5px_0px_0px]"> ارسال </p></button>
+            <button type="submit"><p className="text-red-100 bg-yellow-400  py-4 text-xl font-extrabold text-center px-32 rounded-full justify-center my-11 font-CooperArabic-Regular translate-x-7 shadow-[#BF1725_0px_5px_0px_0px]"> ارسال </p></button>
           </form>
         </div>
         <Image src={"/assets/Groupe de masques 6.png"} alt={""} width={10000} height={10000} className="absolute right-0 top-1/4 w-1/5"/>
@@ -146,12 +161,13 @@ export default function Home() {
 
 
         <div className="">
-          <div className="bg-yellow-400 w-1/4 mx-auto text-center mt-5 rounded-full">
+          <div className="bg-yellow-400 w-1/4 mx-auto text-center mt-5 rounded-full top-1 relative z-0">
             <p className="text-red-100 font-FFHekaya-Light text-2xl px-3 py-2"> لا تفوّتوا الفرصة: ابدؤوا الآن متابعة العد التنازلي للمسابقة </p>
           </div>
-          <div className="bg-red-900 w-1/5 m-auto text-center rounded-t-[50px] -translate-y-2">
-            <p className="text-white font-FFHekaya-Light text-8xl">20 : 17 :24</p>
-            <p className="text-white font-FFHekaya-Light text-4xl"> دقيقة : ساعة : يوم </p>
+          <div className="bg-red-900 w-1/5 m-auto text-center rounded-t-[50px] z-10 relative">
+          <Countdown date={Date.now() + (1000 * 60) * 60*24} className="text-white font-FFHekaya-Light text-8xl"> 
+            </Countdown>
+            <p className="text-white font-FFHekaya-Light text-4xl pb-5"> الثانية : دقيقة : ساعة : يوم  </p>
           </div>
         </div>
       </div>
@@ -209,6 +225,7 @@ export default function Home() {
         </div>
       </div>
     </section>
-    <Footer /></>
+    <Footer />
+    </>
   );
 }

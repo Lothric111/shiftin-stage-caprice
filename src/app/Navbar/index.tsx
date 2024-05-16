@@ -16,8 +16,8 @@ export default function Navbar() {
             <Image src={"/assets/Groupe 25.png"} alt={"Groupe 25"} width={1000} height={10} className="w-full"/>
           </div>
           <div className="flex items-center justify-end gap-32 pt-2 pb-4 mr-28 z-50">
-            <Link href={""} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-white">سجل الآن</Link>
-            <Link href={""} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-white">خطوات المشاركة</Link>
+            <Link href={"#section3"} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-white">سجل الآن</Link>
+            <Link href={"#section2"} className="font-CooperArabic-Regular border-b-2 border-yellow-500 rounded-md text-white">خطوات المشاركة</Link>
           </div>
           <Image src={"/assets/zyro-image.png"} alt={"Icon awesome-tiktok"} width={1000} height={10} className="absolute top-0 right-0 w-1/4 z-40"/> 
         </div>
